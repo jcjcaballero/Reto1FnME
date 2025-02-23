@@ -13,7 +13,7 @@ class OrderRepository:
         self.container = self.database.get_container_client(container_name)
 
     async def get_orders_by_type(self, asset_symbol, order_type):
-        query = f"SELECT * FROM c WHERE c.assetSymbol = '{asset_symbol}' AND c.type = '{order_type}' AND c.status = 'open'"
+        query = f"SELECT TOP 3 * FROM c WHERE c.assetSymbol = '{asset_symbol}' AND c.type = '{order_type}' AND c.status = 'open'"
         items = self.container.query_items(query=query, enable_cross_partition_query=True)
         return  list(items)
 
