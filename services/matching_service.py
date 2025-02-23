@@ -4,8 +4,8 @@ from services.characteristics_analyzer import CharacteristicsAnalyzer
 from asyncio import gather
 
 class MatchingService:
-    def __init__(self):
-        self.order_repo = OrderRepository()
+    def __init__(self, cosmosClient):
+        self.order_repo = OrderRepository(cosmosClient)
         self.characteristics_analyzer = CharacteristicsAnalyzer()
 
     async def process_order(self, incoming_order):

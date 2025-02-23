@@ -1,15 +1,14 @@
-import json
 from azure.cosmos import CosmosClient
 import os
 
 class OrderRepository:
-    def __init__(self):
-        
-        cosmos_db_connection_string = os.getenv("l_cosmos_db_connection_string")
+    _client = None
+    
+    def __init__(self, cosmosClient: CosmosClient):
         cosmos_db_name = os.getenv("l_cosmos_db_name")
         container_name = os.getenv("l_container_name")
 
-        self.client = CosmosClient.from_connection_string(cosmos_db_connection_string)
+        self.client = cosmosClient            
         self.database = self.client.get_database_client(cosmos_db_name)
         self.container = self.database.get_container_client(container_name)
 

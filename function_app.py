@@ -1,11 +1,15 @@
 import azure.functions as func
 import logging
 import json
+import os
+from azure.cosmos import CosmosClient
 from models.order import Order
 from services.matching_service import MatchingService
 
 app = func.FunctionApp()
-matcher = MatchingService()
+cosmos_db_connection_string = os.getenv("l_cosmos_db_connection_string")
+client = CosmosClient.from_connection_string(cosmos_db_connection_string)
+matcher = MatchingService(client)
 
 @app.service_bus_queue_trigger(arg_name="azservicebus", queue_name="ordenescompraventa",
                                connection="sbreto1as_SERVICEBUS") 
