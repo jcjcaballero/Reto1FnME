@@ -12,14 +12,6 @@ class OrderRepository:
         cosmos_db_connection_string = os.getenv("l_cosmos_db_connection_string")
         cosmos_db_name = os.getenv("l_cosmos_db_name")
         container_name = os.getenv("l_container_name")
-        
-        print("/////////////////////")
-        print("/////////////////////")
-        print("/////////////////////")
-        print(cosmos_db_connection_string)
-        print("/////////////////////")
-        print("/////////////////////")
-        print("/////////////////////")        
 
         self.client = CosmosClient.from_connection_string(cosmos_db_connection_string)
         self.database = self.client.get_database_client(cosmos_db_name)
